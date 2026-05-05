@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FocusFlow — 집중 타이머</title>
+  <meta name="description" content="집중력을 높이는 아름다운 공부 타이머. 포모도로 기법과 함께 나만의 집중 시간을 기록하세요." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-phase="dawn" data-mode="focus">
+
+  <!-- Animated background layers -->
+  <div class="bg-layer" id="bgLayer">
+    <div class="bg-gradient"></div>
+    <div class="bg-particles" id="particles"></div>
+    <div class="bg-aurora"></div>
+  </div>
+
+  <!-- Nature decorations -->
+  <div class="nature-layer" id="natureLayer"></div>
+
+  <!-- Floating orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Main app -->
+  <div class="app-wrapper">
+
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-icon">✦</span>
+        <span class="logo-text">FocusFlow</span>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" id="statsBtn" title="통계 보기" aria-label="통계 보기">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 20V10M12 20V4M6 20v-6"/>
+          </svg>
+        </button>
+        <button class="icon-btn" id="settingsBtn" title="설정" aria-label="설정">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+            <path d="M12 2v2m0 16v2M2 12h2m16 0h2"/>
+          </svg>
+        </button>
+        <button class="icon-btn" id="soundBtn" title="소리 토글" aria-label="소리 토글">
+          <svg id="soundIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+        </button>
+        <!-- 🎮 Easter Egg: Touhou Mode -->
+        <button class="icon-btn touhou-egg-btn" id="touhouBtn" title="⑨" aria-label="비밀 모드">
+          <span style="font-size:1rem;line-height:1">⑨</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Phase indicator with manual controls -->
+  <div class="phase-banner" id="phaseBanner">
+    <button class="phase-ctrl-btn" id="phaseDownBtn" aria-label="단계 낮춰" title="단계 낮춰" disabled>▼</button>
+    <span class="phase-icon" id="phaseIcon">🌅</span>
+    <span class="phase-label" id="phaseLabel">집중 시작</span>
+    <button class="phase-ctrl-btn" id="phaseUpBtn" aria-label="단계 높춰" title="단계 높춰">▲</button>
+  </div>
+
+    <!-- Mode selector -->
+    <div class="mode-selector" role="tablist">
+      <button class="mode-btn active" id="modeFocus" role="tab" aria-selected="true" data-mode="focus">집중</button>
+      <button class="mode-btn" id="modeShort" role="tab" aria-selected="false" data-mode="short">짧은 휴식</button>
+      <button class="mode-btn" id="modeLong" role="tab" aria-selected="false" data-mode="long">긴 휴식</button>
+    </div>
+
+    <!-- Timer area -->
+    <main class="timer-section">
+      <div class="timer-ring-wrapper">
+        <!-- SVG ring -->
+        <svg class="timer-svg" viewBox="0 0 300 300" id="timerSvg">
+          <!-- Background track -->
+          <circle class="ring-track" cx="150" cy="150" r="130" />
+          <!-- Progress arc -->
+          <circle class="ring-progress" cx="150" cy="150" r="130" id="ringProgress" />
+          <!-- Glow arc -->
+          <circle class="ring-glow" cx="150" cy="150" r="130" id="ringGlow" />
+          <!-- Dot indicator -->
+          <circle class="ring-dot" cx="150" cy="20" r="6" id="ringDot" />
+        </svg>
+
+        <!-- Center content -->
+        <div class="timer-center">
+          <div class="session-count" id="sessionCount">세션 1</div>
+          <div class="timer-display" id="timerDisplay" aria-live="polite" aria-label="남은 시간">25:00</div>
+          <div class="timer-label" id="timerLabel">집중할 시간이에요</div>
+          <div class="streak-display" id="streakDisplay">
+            <span class="streak-fire">🔥</span>
+            <span id="streakCount">0</span>
+            <span class="streak-text">연속 세션</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="timer-controls">
+        <button class="ctrl-btn secondary" id="resetBtn" title="리셋" aria-label="타이머 리셋">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+            <path d="M3 3v5h5"/>
+          </svg>
+        </button>
+        <button class="ctrl-btn primary" id="startBtn" aria-label="타이머 시작/일시정지">
+          <span id="startBtnIcon">▶</span>
+        </button>
+        <button class="ctrl-btn secondary" id="skipBtn" title="건너뛰기" aria-label="다음 세션으로">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Today stats bar -->
+      <div class="today-stats">
+        <div class="stat-item">
+          <div class="stat-value" id="todayTime">0분</div>
+          <div class="stat-label">오늘 집중</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-value" id="todaySessions">0</div>
+          <div class="stat-label">완료 세션</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-value" id="todayGoal">목표 달성</div>
+          <div class="stat-label" id="goalPercent">0%</div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Task list -->
+    <section class="task-section" aria-label="할 일 목록">
+      <div class="task-header">
+        <h2 class="task-title">오늘의 할 일</h2>
+        <button class="add-task-btn" id="addTaskBtn" aria-label="할 일 추가">+ 추가</button>
+      </div>
+      <div class="task-input-wrapper" id="taskInputWrapper" style="display:none">
+        <input type="text" class="task-input" id="taskInput" placeholder="할 일을 입력하세요..." maxlength="60" />
+        <button class="task-confirm-btn" id="taskConfirm">✓</button>
+      </div>
+      <ul class="task-list" id="taskList" role="list">
+        <!-- Tasks injected by JS -->
+      </ul>
+    </section>
+
+    <!-- Session history -->
+    <section class="session-history-section" aria-label="완료된 세션">
+      <div class="session-history-header">
+        <h2 class="session-history-title">✅ 완료된 세션</h2>
+        <span id="sessionHistoryCount" style="font-size:0.75rem;opacity:0.5">0개</span>
+      </div>
+      <ul class="session-list" id="sessionList" role="list"></ul>
+    </section>
+
+    <!-- Motivational quote -->
+    <div class="quote-section" id="quoteSection">
+      <p class="quote-text" id="quoteText">&ldquo;작은 진전도 진전이다.&rdquo;</p>
+      <span class="quote-author" id="quoteAuthor">&mdash; 익명</span>
+    </div>
+
+  </div><!-- end app-wrapper -->
+
+  <!-- Stats Modal -->
+  <div class="modal-overlay" id="statsModal" role="dialog" aria-modal="true" aria-label="통계">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title">📊 집중 통계</h2>
+        <button class="modal-close" id="statsClose" aria-label="닫기">✕</button>
+      </div>
+      <div class="stats-grid" id="statsGrid">
+        <div class="stats-card">
+          <div class="stats-card-value" id="statTotalTime">0h 0m</div>
+          <div class="stats-card-label">총 집중 시간</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-card-value" id="statTotalSessions">0</div>
+          <div class="stats-card-label">완료 세션</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-card-value" id="statLongestStreak">0</div>
+          <div class="stats-card-label">최장 연속 세션</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-card-value" id="statTodayTime">0분</div>
+          <div class="stats-card-label">오늘 집중</div>
+        </div>
+      </div>
+      <div class="week-chart-section">
+        <h3 class="chart-title">이번 주 집중 시간 (분)</h3>
+        <div class="week-chart" id="weekChart"></div>
+      </div>
+      <div class="phase-progress-section">
+        <h3 class="chart-title">집중 단계 진행</h3>
+        <div class="phase-list" id="phaseList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal" role="dialog" aria-modal="true" aria-label="설정">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title">⚙️ 설정</h2>
+        <button class="modal-close" id="settingsClose" aria-label="닫기">✕</button>
+      </div>
+      <div class="settings-list">
+        <div class="setting-row">
+          <label class="setting-label" for="focusDurationInput">집중 시간 (분)</label>
+          <input type="number" class="setting-input" id="focusDurationInput" min="1" max="90" value="25" />
+        </div>
+        <div class="setting-row">
+          <label class="setting-label" for="shortBreakInput">짧은 휴식 (분)</label>
+          <input type="number" class="setting-input" id="shortBreakInput" min="1" max="30" value="5" />
+        </div>
+        <div class="setting-row">
+          <label class="setting-label" for="longBreakInput">긴 휴식 (분)</label>
+          <input type="number" class="setting-input" id="longBreakInput" min="1" max="60" value="15" />
+        </div>
+        <div class="setting-row">
+          <label class="setting-label" for="sessionsGoalInput">오늘 목표 세션</label>
+          <input type="number" class="setting-input" id="sessionsGoalInput" min="1" max="20" value="8" />
+        </div>
+        <div class="setting-row">
+          <label class="setting-label" for="autoStartInput">자동 시작</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="autoStartInput" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <label class="setting-label" for="notifInput">알림 소리</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="notifInput" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+      <button class="save-settings-btn" id="saveSettingsBtn">저장하기</button>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+  <!-- Touhou Mode: Spellcard activation overlay -->
+  <div class="spellcard-overlay" id="spellcardOverlay">
+    <div class="spellcard-inner">
+      <div class="spellcard-char" id="spellcardChar">🎴</div>
+      <div class="spellcard-title" id="spellcardTitle">Fantasy Heaven</div>
+      <div class="spellcard-sub" id="spellcardSub">「幻想天国」</div>
+    </div>
+  </div>
+
+  <!-- Touhou Mode: Danmaku layer -->
+  <div class="danmaku-layer" id="danmakuLayer"></div>
+
+  <script src="app.js?v=touhou1"></script>
+</body>
+</html>
