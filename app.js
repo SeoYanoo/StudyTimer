@@ -29,24 +29,24 @@ const QUOTES = [
 
 // ─── TOUHOU DATA ─────────────────────────────────────────────────────
 const TOUHOU_QUOTES = [
-  { text:'이 세상에 소력할 수 없는 것은 없어. 나 하쿠레이 레이무가 통으로 연다.', author:'하쿠레이 레이무 「봉령 신사」' },
-  { text:'마스터 스파크! 나는 하가 없어도 마술의 글자는 다 앗았어!', author:'기리사메 마리사 「통환점」' },
-  { text:'시간은 내 손댁에 있어. 최선의 집중을 권공하고지.', author:'이사요이 사쿠야 「홍마관」' },
-  { text:'니 크리에 안에 있는 힘을 꼬내서의 집중이쥔!', author:'플란드르 스카를렛 「통환영야」' },
-  { text:'죄수함에 관한 한, 나는 아무렇지 않아. 다만 공부는 해야해.', author:'코치야 코코로 「동방연애담」' },
-  { text:'환상헷에는 환상의 힘이 있어. 그게 바로 니의 집중력이쥔.', author:'하쿠관 유코 「동방인형극」' },
-  { text:'버덧은 사람은 노력하지 않아. 적당히 하는 것만으로도 풀 수 있는 일이야.', author:'퀸하쿠사 표림 「동방풀을에 제는」' },
-  { text:'살아있다는 것 자체를 이해하지 못한다면, 지식도 의미가 없어.', author:'코치야 산메 「미무려의 🐱」' },
-  { text:'다음 스펙카드가 림하고 있어 — 내 집중력에 답하라!', author:'레미리아 스카를렛 「홍마관」' },
-  { text:'집중하지 않으면 탄막에 맞아 좌. 쿠소! (집중해!)', author:'주코 「봉령 신사」' },
+  { text:'이 세상에 내가 해결 못할 일은 없어. 하쿠레이 레이무가 직접 나설게.', author:'하쿠레이 레이무 「봉래의 약」' },
+  { text:'마스터 스파크! 노력보다 중요한 건 집중력이야. 나는 그걸 알고 있어!', author:'기리사메 마리사 「마법의 숲」' },
+  { text:'시간은 내 손안에 있어. 지금 이 순간에 최선의 집중을 다해.', author:'이사요이 사쿠야 「홍마관」' },
+  { text:'내 안에 있는 힘을 꺼내봐. 그게 바로 진짜 집중이야!', author:'플란드르 스카를렛 「붉은 안개의 관」' },
+  { text:'감정에 휘둘리지 않는 것, 그게 집중의 시작이야.', author:'코치야 코코로 「신령묘」' },
+  { text:'환상향에는 환상의 힘이 있어. 그 힘이 바로 너의 집중력이야.', author:'야쿠모 유카리 「봉래의 약」' },
+  { text:'쉬운 일은 없어. 하지만 집중하면 못 해낼 일도 없지.', author:'히나나위 텐시 「천공의 마을」' },
+  { text:'살아있다는 것의 의미를 알고 싶다면, 먼저 지금 이 순간에 집중해봐.', author:'코치야 사나에 「신의 바람 사당」' },
+  { text:'다음 스펠카드가 기다리고 있어 — 내 집중력에 응답하라!', author:'레미리아 스카를렛 「홍마관」' },
+  { text:'집중하지 않으면 탄막에 맞아. 자, 정신 차려!', author:'치르노 「안개의 호수」' },
 ];
 
 const TOUHOU_PHASES = [
-  { id:'dawn',    label:'和ヅル式・霧雨ボム',   icon:'☯️',  charName:'레이무', spellName:'Yin-Yang Orb',    spellJP:'「陰陽玉」' },
-  { id:'morning', label:'抱ぐ天子・小宇宙',      icon:'⭐️', charName:'마리사', spellName:'Master Spark',     spellJP:'「マスタースパーク」' },
-  { id:'flow',    label:'時間操作・小宇宙',       icon:'⏱️', charName:'사쿠야', spellName:'Silver Sign',      spellJP:'「銀色どは渡れ」' },
-  { id:'deep',    label:'禁断・フランドール',     icon:'✨',  charName:'플란드르', spellName:'Four of a Kind', spellJP:'「フォー オブ ア カインド」' },
-  { id:'zone',    label:'終来・天後赤眼関',       icon:'🔥',  charName:'파들',   spellName:'Scarlet Meister',  spellJP:'「スカーレット マイスター」' },
+  { id:'dawn',    label:'레이무의 음양옥',    icon:'☯️',  charName:'레이무',   spellName:'음양옥 결계',    spellKR:'「음양의 경계」' },
+  { id:'morning', label:'마리사의 마스터 스파크', icon:'⭐️', charName:'마리사',   spellName:'마스터 스파크',  spellKR:'「극광의 빛줄기」' },
+  { id:'flow',    label:'사쿠야의 시간 조작', icon:'⏱️', charName:'사쿠야',   spellName:'은빛 결계',      spellKR:'「시간이 멈춘 세계」' },
+  { id:'deep',    label:'플란드르의 금단',    icon:'✨',  charName:'플란드르',  spellName:'포 오브 어 카인드', spellKR:'「파괴의 네 자매」' },
+  { id:'zone',    label:'레미리아의 홍안결',  icon:'🔥',  charName:'레미리아', spellName:'스칼렛 마이스터', spellKR:'「진홍의 지배자」' },
 ];
 
 const DANMAKU_COLORS = [
@@ -751,7 +751,13 @@ function init() {
     if (e.code === 'Space') { e.preventDefault(); startStop(); }
     if (e.code === 'KeyR') resetTimer();
     if (e.code === 'KeyS') openStats();
+    if (e.code === 'KeyF') toggleFullscreen();
   });
+
+  // Fullscreen button
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+  if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
+  document.addEventListener('fullscreenchange', updateFullscreenIcon);
 
   // ⑨ Easter egg: Touhou mode
   const touhouBtn = document.getElementById('touhouBtn');
@@ -820,7 +826,7 @@ function showSpellcard(phaseData, callback) {
 
   charEl.textContent  = phaseData.icon;
   titleEl.textContent = phaseData.spellName;
-  subEl.textContent   = phaseData.spellJP;
+  subEl.textContent   = phaseData.spellKR;
 
   overlay.classList.add('active');
 
@@ -866,12 +872,12 @@ function enableTouhouMode() {
   showSpellcard(curPhase, () => {
     startDanmaku();
     replaceCherryBlossoms();
-    showToast(`✨ 幻想郷 모드 활성화! ${curPhase.charName}와 함께 집중하세요~`);
+    showToast(`✨ 동방 집중 모드 활성화! ${curPhase.charName}와 함께 집중하세요~`);
   });
 
   // Override logo text
   const logoText = document.querySelector('.logo-text');
-  if (logoText) logoText.textContent = '幻想郷Flow';
+  if (logoText) logoText.textContent = '동방 FocusFlow';
 
   // Override phase display
   applyTouhouPhase(state.currentPhase);
@@ -905,3 +911,29 @@ function toggleTouhouMode() {
 }
 
 // Wire up the ⑨ button — handled inside init()
+
+// ─── FULLSCREEN ───────────────────────────────────────────────────
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+function updateFullscreenIcon() {
+  const btn = document.getElementById('fullscreenBtn');
+  if (!btn) return;
+  const isFs = !!document.fullscreenElement;
+  btn.setAttribute('title', isFs ? '전체화면 종료' : '전체화면');
+  btn.setAttribute('aria-label', isFs ? '전체화면 종료' : '전체화면');
+  const icon = btn.querySelector('svg');
+  if (!icon) return;
+  if (isFs) {
+    // Exit fullscreen icon (compress)
+    icon.innerHTML = `<path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>`;
+  } else {
+    // Enter fullscreen icon (expand)
+    icon.innerHTML = `<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>`;
+  }
+}
