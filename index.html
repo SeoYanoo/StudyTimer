@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,9 +8,14 @@
   <meta name="description" content="집중력을 높이는 아름다운 공부 타이머. 포모도로 기법과 함께 나만의 집중 시간을 기록하세요." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body data-phase="dawn" data-mode="focus">
 
   <!-- Animated background layers -->
@@ -39,26 +45,26 @@
       <div class="header-actions">
         <button class="icon-btn" id="statsBtn" title="통계 보기" aria-label="통계 보기">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 20V10M12 20V4M6 20v-6"/>
+            <path d="M18 20V10M12 20V4M6 20v-6" />
           </svg>
         </button>
         <button class="icon-btn" id="settingsBtn" title="설정" aria-label="설정">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
-            <path d="M12 2v2m0 16v2M2 12h2m16 0h2"/>
+            <circle cx="12" cy="12" r="3" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14" />
+            <path d="M12 2v2m0 16v2M2 12h2m16 0h2" />
           </svg>
         </button>
         <button class="icon-btn" id="soundBtn" title="소리 토글" aria-label="소리 토글">
           <svg id="soundIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
           </svg>
         </button>
         <!-- 🖥️ Fullscreen -->
         <button class="icon-btn" id="fullscreenBtn" title="전체화면" aria-label="전체화면">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
           </svg>
         </button>
         <!-- 🎮 Easter Egg: Touhou Mode -->
@@ -69,12 +75,12 @@
     </header>
 
     <!-- Phase indicator with manual controls -->
-  <div class="phase-banner" id="phaseBanner">
-    <button class="phase-ctrl-btn" id="phaseDownBtn" aria-label="단계 낮춰" title="단계 낮춰" disabled>▼</button>
-    <span class="phase-icon" id="phaseIcon">🌅</span>
-    <span class="phase-label" id="phaseLabel">집중 시작</span>
-    <button class="phase-ctrl-btn" id="phaseUpBtn" aria-label="단계 높춰" title="단계 높춰">▲</button>
-  </div>
+    <div class="phase-banner" id="phaseBanner">
+      <button class="phase-ctrl-btn" id="phaseDownBtn" aria-label="단계 낮춰" title="단계 낮춰" disabled>▼</button>
+      <span class="phase-icon" id="phaseIcon">🌅</span>
+      <span class="phase-label" id="phaseLabel">집중 시작</span>
+      <button class="phase-ctrl-btn" id="phaseUpBtn" aria-label="단계 높춰" title="단계 높춰">▲</button>
+    </div>
 
     <!-- Mode selector -->
     <div class="mode-selector" role="tablist">
@@ -115,8 +121,8 @@
       <div class="timer-controls">
         <button class="ctrl-btn secondary" id="resetBtn" title="리셋" aria-label="타이머 리셋">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-            <path d="M3 3v5h5"/>
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+            <path d="M3 3v5h5" />
           </svg>
         </button>
         <button class="ctrl-btn primary" id="startBtn" aria-label="타이머 시작/일시정지">
@@ -124,7 +130,8 @@
         </button>
         <button class="ctrl-btn secondary" id="skipBtn" title="건너뛰기" aria-label="다음 세션으로">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/>
+            <polygon points="5 4 15 12 5 20 5 4" />
+            <line x1="19" y1="5" x2="19" y2="19" />
           </svg>
         </button>
       </div>
@@ -276,4 +283,5 @@
 
   <script src="app.js?v=touhou1"></script>
 </body>
+
 </html>
